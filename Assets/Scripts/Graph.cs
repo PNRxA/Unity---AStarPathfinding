@@ -13,6 +13,7 @@ public class Graph : MonoBehaviour
     private int gridSizeX, gridSizeZ;
     private Vector3 scale;
     private Vector3 halfScale;
+    public List<Node> path;
 
     // Use this for initialization
     void Start()
@@ -43,6 +44,11 @@ public class Graph : MonoBehaviour
 
                     // Set the color of Gizmos for node depending on walkable
                     Gizmos.color = node.walkable ? new Color(0, 0, 1, 0.5f) : new Color(1, 0, 0, 0.5f);
+
+                    if(path != null && path.Contains(node))
+                    {
+                        Gizmos.color = Color.black;
+                    }
 
                     // Draw a sphere to represent node
                     Gizmos.DrawSphere(node.position, nodeRadius);
@@ -129,7 +135,10 @@ public class Graph : MonoBehaviour
                 int checkZ = node.gridZ + z;
 
                 // Check ifthe index is out of bounds of the grid
-                if (checkX >= 0 && checkX < gridSizeX && checkZ >= 0 && checkZ < gridSizeZ)
+                if (checkX >= 0 && 
+                    checkX < gridSizeX && 
+                    checkZ >= 0 && 
+                    checkZ < gridSizeZ)
                 {
                     // Add the neighbour to the list
                     neighbours.Add(nodes[checkX, checkZ]);
