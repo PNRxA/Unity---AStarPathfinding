@@ -162,32 +162,7 @@ public class Graph : MonoBehaviour
         int x = Mathf.RoundToInt((gridSizeX - 1) * percentX);
         int z = Mathf.RoundToInt((gridSizeZ - 1) * percentZ);
 
-        Node node = nodes[x, z];
-
-        if (!node.walkable)
-        {
-            return FindClosestWalkable(node);
-        }
-
         // Return the node at translated coordinate
-        return node;
-    }
-
-    public Node FindClosestWalkable(Node node)
-    {
-        for (int i = 0; i < gridSizeX * gridSizeZ; i++)
-        {
-            List<Node> neighbours = new List<Node>();
-            neighbours = GetNeighbours(node);
-            foreach (Node neighbour in neighbours)
-            {
-                if (neighbour.walkable)
-                {
-                    return neighbour;
-                }
-            }
-        }
-
-        return null;
+        return nodes[x, z];
     }
 }
